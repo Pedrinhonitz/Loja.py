@@ -27,7 +27,6 @@ class Registration:
     email = None
     password = None
     cpf = None
-    credit  = 1000
 
 
 #-----Classe-dos-Produtos----
@@ -155,7 +154,6 @@ def Title(User, Balance):
 
 # --------------Função-de-Cadastro-----------------
 def Inscribe():
-    fileSubscription = []
     # --------------------Nome--------------------
     user_registrer = Registration()
     while True:
@@ -182,12 +180,25 @@ def Inscribe():
     while True:
         print(f"{CYAN}• DIGITE SEU E-MAIL: {RESET}")
         email = str(input(f"{GREEN}→ {RESET}"))
-        divideLine()
-        if '@' in email:
-            user_registrer.email = email
-            break
+        counter = 0
+
+        for emailCheck in range(len(listUsers)):
+            if email == listUsers[emailCheck].email:
+                counter+=1
+            else:
+                continue
+
+        if counter == 0:    
+            divideLine()
+            if '@' in email:
+                user_registrer.email = email
+                break
+            else:
+                print(f"{RED} {'» SEU E-MAIL NÃO POSSUI @ «':^40} {RESET}")
+                divideLine()
         else:
-            print(f"{RED} {'» SEU E-MAIL NÃO POSSUI @ «':^40} {RESET}")
+            divideLine()
+            print(f"{RED} {'» EMAIL JÁ CADASTRADO «':^40} {RESET}")
             divideLine()
 
 
@@ -207,6 +218,8 @@ def Inscribe():
     while True:
         print(f"{CYAN}• DIGITE SEU CPF: (APENAS NÚMEROS){RESET}")
         cpf = str(input(f"{GREEN}→ {RESET}"))
+        counter = 0
+
         sum1 = sum2 = 0
         if len(cpf) == 11:
             cpf = int(cpf)  # 11144477705
@@ -238,26 +251,35 @@ def Inscribe():
                 dig2 = str(dig2)
                 cpfvalid = str(cpf_ten) + dig2
                 cpfvalid = int(cpfvalid)
-            if cpf == cpfvalid:
-                user_registrer.cpf = cpf
-                break
+
+            for cpfCheck in range(len(listUsers)):
+                if cpf == listUsers[cpfCheck].cpf:
+                    counter+=1
+                else:
+                    continue
+            if counter == 0:
+                if cpf == cpfvalid:
+                    user_registrer.cpf = cpf
+                    break
+                else:
+                    divideLine()
+                    print(f"{RED} {'» ESTE CPF NÃO É VÁLIDO! «':^40} {RESET}")
+                    divideLine()
             else:
                 divideLine()
-                print(f"{RED} {'» ESTE CPF NÃO É VÁLIDO! «':^40} {RESET}")
+                print(f"{RED} {'» CPF JÁ CADASTRADO «':^40} {RESET}")
                 divideLine()
         else:
             divideLine()
             print(f"{RED} {'» ESTE CPF NÃO É VÁLIDO! «':^40} {RESET}")
             divideLine()
+
+
     divideLine()
     print("\n" *5)
     divideLine()
     print(f"{GREEN} {' ► USUÁRIO CADASTRADO COM SUCESSO! ◄':^40} {RESET}")
-    listUsers.append(user_registrer)    
-    fileSubscription.append(user_registrer.name)
-    fileSubscription.append(user_registrer.email)
-    fileSubscription.append(user_registrer.password)
-    fileSubscription.append(user_registrer.cpf)
+    listUsers.append(user_registrer)
     
 
 
