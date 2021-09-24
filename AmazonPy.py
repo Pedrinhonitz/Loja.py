@@ -5,7 +5,6 @@ listAppliance = []
 listFurniture = []
 listBook = []
 listShoppingCart = []
-listTotal = []
 
 
 #---Cores-do-Sistema----
@@ -321,8 +320,6 @@ def menuProducts(totalPurchase, Balance):
 
     else:
 
-        functionProduct()
-
 
         print(f"{PURPLE} {' → ELETRÔNICOS (0)':^40} {RESET}")
         divideLine()
@@ -619,21 +616,21 @@ def menuProducts(totalPurchase, Balance):
                         return totalPurchase, Balance 
                 
                 else:
-                    print(f"{RED} {'» ESTE PRODUTO NÃO EXISTE «':^40} {RESET}")
+                    print("\n" *5)
                     divideLine()
+                    print(f"{RED} {'» ESTE PRODUTO NÃO EXISTE «':^40} {RESET}")
                     return totalPurchase, Balance 
 
         elif products_menu == '4':
             print("\n" *5)
             divideLine()
             print(f"{GREEN} {'► VOCÊ SELECIONOU MENU PRINCIPAL ◄':^40} {RESET}")
-            divideLine()
             return totalPurchase, Balance
 
         else:
+            print("\n" *5)
             divideLine()
             print(f"{RED} {'» OPÇÃO INVÁLIDA «':^40} {RESET}")
-            divideLine()
             return totalPurchase, Balance
 
 
@@ -645,8 +642,6 @@ def shoppingCart(totalPurchase, Balance):
     print(f"{PURPLE}╔═════╦══════════════════════════════════════════════════════════════╦═════════╦═══════╦═════════════╗{RESET}")
     print(f"{PURPLE}║ {GREY}Cód{PURPLE} ║            {CYAN}         Descrição do Produto             {PURPLE}        ║ {GREEN} Preço {PURPLE} ║ {YELLOW} Qnt {PURPLE} ║ {RED}   Total   {PURPLE} ║{RESET}")
     for product in listShoppingCart:
-        total_gross = product.price * product.quantity
-        listTotal.append(total_gross)
         print(f"{PURPLE}╠═════╬══════════════════════════════════════════════════════════════╬═════════╬═══════╬═════════════╣{RESET}")
         print(f"{PURPLE}║{GREY} {cod} {PURPLE}  ║{CYAN} {product.description:^60} {PURPLE}║{GREEN} {product.price:^6} {PURPLE} ║{YELLOW} {product.quantity:^4} {PURPLE} ║ {RED} R$ {product.price * product.quantity:^7} {PURPLE}║{RESET}  ")
         cod +=1
@@ -686,7 +681,6 @@ def shoppingCart(totalPurchase, Balance):
             divideLine()
             print(f"{GREEN}{' ► PAGAMENTO EFETUADO COM SUCESSO ◄':^40}{RESET}")
             listShoppingCart.clear()
-            listTotal.clear()
             totalPurchase -= totalPurchase
             Balance = 1000
 
@@ -699,9 +693,9 @@ def shoppingCart(totalPurchase, Balance):
             return totalPurchase, Balance
 
         else:
+            print("\n" *5)
             divideLine()
             print(f"{RED} {'» OPÇÃO INVÁLIDA «':^40} {RESET}")
-            divideLine()
             return totalPurchase, Balance 
         
         
@@ -727,9 +721,9 @@ def shoppingCart(totalPurchase, Balance):
         return totalPurchase, Balance
 
     else:
+        print("\n" *5)
         divideLine()
         print(f"{RED} {'» OPÇÃO INVÁLIDA «':^40} {RESET}")
-        divideLine()
         return totalPurchase, Balance
 
 
@@ -754,9 +748,11 @@ def showCredits():
         print(f"{GREEN}{'► VOCÊ SELECIONOU VOLTAR AO MENU ◄':^40}{RESET}")
 
     else:
+        print("\n" *5)
         divideLine()
         print(f"{RED} {'» OPÇÃO INVÁLIDA «':^40} {RESET}")
         divideLine()
+        showCredits()
 
 
 #---Função-que-Verifica-as-Abas-Escolhidas------
@@ -814,7 +810,6 @@ def Menu():
             if User != '':
                 divideLine()
                 print(f"{GREEN} {'► VOCÊ SELECIONOU CARRINHO ◄':^40} {RESET}")
-                divideLine()
                 totalPurchase, Balance = shoppingCart(totalPurchase, Balance)
             else:
                 print("\n" *5)
